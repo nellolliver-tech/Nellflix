@@ -1,557 +1,171 @@
 <!DOCTYPE html>
-
-
-
 <html lang="pt-br">
-
-
 <head>
-
-
   <meta charset="utf-8" />
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
-  <title>Treinamentos IPRSM Kids</title>
-
-
+  <title>NELLFLIX</title>
   <meta name="description" content="Página estilo Netflix/YouTube para exibir vídeos privados do Vimeo com acesso restrito." />
-
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-
   <style>
-
-
     :root {
-
-
-      --bg: #0b0b12; --panel: #12121b; --soft: #1b1b2b; --text: #e7e7ef; --muted: #9aa0aa;
-
-
-      --brand: #8b5cf6; --brand-2: #22d3ee; --ok: #22c55e; --warn: #f59e0b;
-
-
-      --radius: 18px; --shadow: 0 10px 30px rgba(0,0,0,.35);
-
-
+      --bg:#0b0b12;--panel:#12121b;--soft:#1b1b2b;--text:#e7e7ef;--muted:#9aa0aa;
+      --brand:#8b5cf6;--brand-2:#22d3ee;--ok:#22c55e;--warn:#f59e0b;
+      --radius:18px;--shadow:0 10px 30px rgba(0,0,0,.35);
     }
-
-
-    *{box-sizing:border-box}html,body{height:100%}body{margin:0;background:radial-gradient(1200px 800px at 20% -10%,rgba(139,92,246,.25),transparent 60%),radial-gradient(900px 600px at 120% 10%,rgba(34,211,238,.18),transparent 60%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-
-
-    a{color:inherit;text-decoration:none}.container{max-width:1200px;margin:0 auto;padding:20px}
-
-
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(1200px 800px at 20% -10%,rgba(139,92,246,.25),transparent 60%),radial-gradient(900px 600px at 120% 10%,rgba(34,211,238,.18),transparent 60%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
     header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(10px);background:linear-gradient(180deg,rgba(11,11,18,.85),rgba(11,11,18,.55) 70%,transparent);border-bottom:1px solid rgba(255,255,255,.06)}
-
-
-    .nav{display:flex;align-items:center;gap:18px;padding:14px 20px}.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}.logo-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow)}
-
-
-    .search{flex:1;display:flex;gap:10px}.input,select{flex:1;background:var(--panel);border:1px solid rgba(255,255,255,.08);color:var(--text);padding:12px 14px;border-radius:12px;outline:none}.input::placeholder{color:var(--muted)}
-
-
+    .nav{display:flex;align-items:center;gap:18px;padding:14px 20px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .logo-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow)}
+    .search{flex:1;display:flex;gap:10px}
+    .input,select{flex:1;background:var(--panel);border:1px solid rgba(255,255,255,.08);color:var(--text);padding:12px 14px;border-radius:12px;outline:none}
+    .input::placeholder{color:var(--muted)}
     .btn{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
-
-
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);padding:10px 14px;border-radius:12px;cursor:pointer}
-
-
-    .hero{padding:28px 20px 8px}.headline{font-size:clamp(20px,3.2vw,32px);font-weight:800;margin:0}.sub{color:var(--muted);margin:6px 0 0}
-
-
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:20px}@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:1024px){.grid{grid-template-columns:repeat(5,1fr)}}
-
-
+    .hero{padding:28px 20px 8px}
+    .headline{font-size:clamp(20px,3.2vw,32px);font-weight:800;margin:0}
+    .sub{color:var(--muted);margin:6px 0 0}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:20px}
+    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1024px){.grid{grid-template-columns:repeat(5,1fr)}}
     .card{position:relative;border-radius:var(--radius);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);overflow:hidden;box-shadow:var(--shadow);cursor:pointer}
-
-
-    .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0f0f16;display:block}.card .meta{padding:10px 12px 12px}.title{font-weight:700;font-size:14px;line-height:1.3;margin:0 0 4px}
-
-
+    .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0f0f16;display:block}
+    .card .meta{padding:10px 12px 12px}
+    .title{font-weight:700;font-size:14px;line-height:1.3;margin:0 0 4px}
     .badge{display:inline-block;font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(139,92,246,.16);border:1px solid rgba(139,92,246,.45);color:#d6ccff}
-
-
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);z-index:100}.modal.open{display:grid}
-
-
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);z-index:100}
+    .modal.open{display:grid}
     .modal-dialog{width:min(980px,96vw);background:var(--panel);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);position:relative}
-
-
-    .modal-head{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;}
-
-
-
-
-
- /* Gate (acesso restrito) */
-
-
-    .gate { position: fixed; inset:0; display:grid; place-items:center; background: radial-gradient(1000px 600px at 20% -10%, rgba(139,92,246,.2), transparent 60%), var(--bg); z-index: 200 }
-
-
-    .gate-card { width:min(520px, 94vw); background: var(--panel); border-radius: 20px; box-shadow: var(--shadow); border:1px solid rgba(255,255,255,.08); padding: 24px }
-
-
-    .gate h1 { margin:0 0 8px; font-size: 22px }
-
-
-    .gate p { margin:0 0 14px; color: var(--muted) }
-
-
-
-
-
-    /* Footer */
-
-
-    footer { color: var(--muted); text-align:center; padding: 24px 16px; font-size: 12px }
-
-
-    .pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px dashed rgba(255,255,255,.18); }
-
-
-
-
-
-    .player{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
-
-
-    .pdf-fab {
-
-
-      position: absolute;
-
-
-      top: 12px;
-
-
-      right: 12px;
-
-
-      width: 50px;
-
-
-      height: 50px;
-
-
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-
-
-      color: white;
-
-
-      font-size: 24px;
-
-
-      display: flex;
-
-
-      align-items: center;
-
-
-      justify-content: center;
-
-
-      border-radius: 50%;
-
-
-      text-decoration: none;
-
-
-      box-shadow: var(--shadow);
-
-
-      transition: transform 0.2s ease, opacity 0.2s ease;
-
-
-      z-index: 10;
-
-
-    }
-
-
-    .pdf-fab:hover {transform: scale(1.1);opacity: 0.9;}
-
-
+    .modal-head{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between}
+    .gate{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(1000px 600px at 20% -10%,rgba(139,92,246,.2),transparent 60%),var(--bg);z-index:200}
+    .gate-card{width:min(520px,94vw);background:var(--panel);border-radius:20px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.08);padding:24px}
+    .gate h1{margin:0 0 8px;font-size:22px}
+    .gate p{margin:0 0 14px;color:var(--muted)}
     footer{color:var(--muted);text-align:center;padding:24px 16px;font-size:12px}
-
-
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px dashed rgba(255,255,255,.18)}
+    .player{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+    .pdf-fab{position:absolute;top:12px;right:12px;width:50px;height:50px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;font-size:24px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;box-shadow:var(--shadow);transition:transform .2s ease,opacity .2s ease;z-index:10}
+    .pdf-fab:hover{transform:scale(1.1);opacity:.9}
   </style>
-
-
 </head>
-
-
 <body>
-
-
   <!-- GATE DE ACESSO -->
-
-
   <div id="gate" class="gate">
-
-
     <div class="gate-card">
-
-
       <div class="logo" style="margin-bottom:10px">
-
-
         <div class="logo-badge">🎬</div>
-
-
-        <div>Treinamentos IPRSM Kids</div>
-
-
+        <div>NELLFLIX</div>
       </div>
-
-
       <h1>Digite o código de acesso</h1>
-
-
-      <p>Este portal exibe vídeos privados do Minsiterio Infantil da Igreja Presbiteriana Renovada de São Miguel.</p>
-
-
-      <div style="display:flex; gap:10px; align-items:center">
-
-
+      <p>Este portal exibe Filmes e Series de uso privado da nossa Familia.</p>
+      <div style="display:flex;gap:10px;align-items:center">
         <input id="accessCode" class="input" type="password" placeholder="Código fornecido pelo administrador" />
-
-
         <button id="enterBtn" class="btn">Entrar</button>
-
-
       </div>
-
-
-      <p id="gateMsg" style="color:#fda4af; margin-top:10px; display:none">Código inválido.</p>
-
-
-      <div style="margin-top:14px" class="pill">🔒O acesso é permitido apenas para usuários autorizados.</div>
-
-
+      <p id="gateMsg" style="color:#fda4af;margin-top:10px;display:none">Código inválido.</p>
+      <div style="margin-top:14px" class="pill">🔒 O acesso é permitido apenas para familiares autorizados.</div>
     </div>
-
-
   </div>
-
-
-
-
 
   <header>
-
-
     <nav class="nav container">
-
-
-      <div class="logo"><div class="logo-badge">▶</div><span>IPRSM KIDS</span></div>
-
-
+      <div class="logo"><div class="logo-badge">▶</div><span>NELLFLIX</span></div>
       <div class="search">
-
-
         <input id="q" class="input" placeholder="Pesquisar vídeos... (título, categoria, tags)" />
-
-
         <select id="category"><option value="">Todas categorias</option></select>
-
-
         <button id="clearBtn" class="btn-ghost">Limpar</button>
-
-
       </div>
-
-
     </nav>
-
-
   </header>
 
-
-
-
-
   <section class="hero container">
+    <h1 class="headline">NELLFLIX</h1>
+"Diversão e momentos inesquecíveis para toda a família, em um só lugar!"  </section>
 
-
-    <h1 class="headline">Treinamentos IPRSM Kids</h1>
-
-
-    <p class="sub">Capacitando líderes para servir no ministério infantil, guiando crianças no caminho de Jesus.</p>
-
-
-  </section>
-
-
-
-
-
-  <main class="container"><div id="grid" class="grid" role="list"></div></main>
-
-
-
-
+  <main class="container">
+    <div id="grid" class="grid" role="list"></div>
+  </main>
 
   <div id="modal" class="modal" aria-hidden="true" aria-label="player modal">
-
-
     <div class="modal-dialog">
-
-
       <div class="modal-head">
-
-
         <strong id="nowTitle">Reprodução</strong>
-
-
         <button id="closeModal" class="btn">Fechar</button>
-
-
       </div>
-
-
       <div style="position:relative">
-
-
         <iframe id="player" class="player" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-
         <a id="pdfBtn" class="pdf-fab" href="#" target="_blank" style="display:none" title="Abrir PDF">📄</a>
-
-
       </div>
-
-
     </div>
-
-
   </div>
 
-
-
-
-
   <footer>
-
-
-    <div class="pill">ℹ️ Recomendado: Cada vídeo possui uma apostila disponível no botão do canto superior direito.</div>
-
-
-  </footer>
-
-
-
-
+    <div class="pill">ℹ️ DICA: Uso recomendado com moderação. Destinado exclusivamente a familiares.
 
   <script>
-
-
-    /**********************
-
-
-     * CONFIGURAÇÕES
-
-
-     **********************/
-
-
-    const ACCESS_CODES = ["123456"];
-
-
-    const VIDEOS = [
-
-
-      { id: "833660756", title: "Introdução ao Projeto", category: "Treinamentos", tags: ["onboarding","aula 1"], thumb: "https://i.imgur.com/YGut6uX.png", pdf: "/media/nelson/MEGADRIVE/PAGINA DE TREINAMENTO/apostilas/introducao.pdf" },
-
-
-      { id: "833660756", title: "Atividades", category: "Rotinas", tags: ["onboarding","aula 1"], thumb: "https://i.imgur.com/jYxd6dP.png", pdf: "/media/nelson/MEGADRIVE/PAGINA DE TREINAMENTO/apostilas/introducao.pdf" },
-
-
-      { id: "240522592", title: "Módulo 1", category: "Treinamentos", tags: ["processos","operacional"], thumb: "https://i.imgur.com/fQ07Fkq.png", pdf: "/media/nelson/MEGADRIVE/PAGINA DE TREINAMENTO/apostilas/modulo2.pdf" }
-
-
+    const ACCESS_CODES=["123456"];
+    const VIDEOS=[
+      {id:"833660756",title:"Introdução ao Projeto",category:"Treinamentos",tags:["onboarding","aula 1"],thumb:"https://i.imgur.com/YGut6uX.png",pdf:"/media/nelson/MEGADRIVE/PAGINA DE TREINAMENTO/apostilas/introducao.pdf"},
+      {id:"833660756",title:"Atividades",category:"Rotinas",tags:["onboarding","aula 1"],thumb:"https://i.imgur.com/jYxd6dP.png",pdf:"/media/nelson/MEGADRIVE/PAGINA DE TREINAMENTO/apostilas/introducao.pdf"},
+      {id:"240522592",title:"Módulo 1",category:"Treinamentos",tags:["processos","operacional"],thumb:"https://i.imgur.com/fQ07Fkq.png",pdf:"/media/nelson/MEGADRIVE/PAGINA DE TREINAMENTO/apostilas/modulo2.pdf"}
     ];
+    const CATEGORY_COLORS={"Treinamentos":"rgba(56,189,248,.18)","Séries":"rgba(244,114,182,.18)","Eventos":"rgba(163,230,53,.18)"};
 
-
-
-
-
-    const CATEGORY_COLORS = { "Treinamentos":"rgba(56,189,248,.18)", "Séries":"rgba(244,114,182,.18)", "Eventos":"rgba(163,230,53,.18)" };
-
-
-
-
-
-    /**********************
-
-
-     * GATE
-
-
-     **********************/
-
-
-    const gate = document.getElementById('gate'), gateMsg = document.getElementById('gateMsg');
-
-
+    const gate=document.getElementById('gate'),gateMsg=document.getElementById('gateMsg');
     document.getElementById('enterBtn').addEventListener('click',()=>{
-
-
       const code=document.getElementById('accessCode').value.trim();
-
-
       if(ACCESS_CODES.includes(code)){localStorage.setItem('portal_access','ok');gate.style.display='none';}
-
-
       else gateMsg.style.display='block';
-
-
     });
-
-
     if(localStorage.getItem('portal_access')==='ok')gate.style.display='none';
 
-
-
-
-
-    /**********************
-
-
-     * CATÁLOGO
-
-
-     **********************/
-
-
-    const grid=document.getElementById('grid'), q=document.getElementById('q'), catSelect=document.getElementById('category'), clearBtn=document.getElementById('clearBtn');
-
-
+    const grid=document.getElementById('grid'),q=document.getElementById('q'),catSelect=document.getElementById('category'),clearBtn=document.getElementById('clearBtn');
     const cats=[...new Set(VIDEOS.map(v=>v.category))].sort();
-
-
     cats.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;catSelect.appendChild(o);});
 
-
     function makeCard(v){
-
-
       const card=document.createElement('article');card.className='card';card.role='listitem';
-
-
       const img=document.createElement('img');img.className='thumb';img.src=v.thumb;img.alt=v.title;
-
-
       const meta=document.createElement('div');meta.className='meta';
-
-
       const title=document.createElement('h3');title.className='title';title.textContent=v.title;
-
-
       const badge=document.createElement('span');badge.className='badge';badge.textContent=v.category;
-
-
       const bg=CATEGORY_COLORS[v.category];if(bg){badge.style.background=bg;badge.style.borderColor='transparent';}
-
-
       meta.append(title,badge);card.append(img,meta);card.addEventListener('click',()=>openPlayer(v));
-
-
       return card;
-
-
     }
-
 
     function render(){
-
-
       const term=q.value.toLowerCase(),cat=catSelect.value;
-
-
       const filtered=VIDEOS.filter(v=>{const hay=(v.title+' '+(v.tags||[]).join(' ')).toLowerCase();return(!term||hay.includes(term))&&(!cat||v.category===cat);});
-
-
       grid.replaceChildren(...filtered.map(makeCard));
-
-
     }
 
-
-    q.addEventListener('input',render);catSelect.addEventListener('change',render);
-
-
+    q.addEventListener('input',render);
+    catSelect.addEventListener('change',render);
     clearBtn.addEventListener('click',()=>{q.value='';catSelect.value='';render();});
-
-
     render();
 
-
-
-
-
-    /**********************
-
-
-     * PLAYER MODAL + PDF FAB
-
-
-     **********************/
-
-
-    const modal=document.getElementById('modal'), player=document.getElementById('player'), nowTitle=document.getElementById('nowTitle'), pdfBtn=document.getElementById('pdfBtn');
-
-
+    const modal=document.getElementById('modal'),player=document.getElementById('player'),nowTitle=document.getElementById('nowTitle'),pdfBtn=document.getElementById('pdfBtn');
     document.getElementById('closeModal').addEventListener('click',closePlayer);
-
-
     modal.addEventListener('click',e=>{if(e.target===modal)closePlayer();});
-
-
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closePlayer();});
 
-
-
-
-
     function openPlayer(v){
-
-
       player.src=`https://player.vimeo.com/video/${v.id}?autoplay=1&title=0&byline=0&portrait=0&dnt=1&controls=0`;
-
-
       nowTitle.textContent=v.title;
-
-
-      if(v.pdf){pdfBtn.href=v.pdf; pdfBtn.style.display='flex';} else {pdfBtn.style.display='none';}
-
-
-      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-
-
+      if(v.pdf){pdfBtn.href=v.pdf;pdfBtn.style.display='flex';}else{pdfBtn.style.display='none';}
+      modal.classList.add('open');modal.setAttribute('aria-hidden','false');
     }
 
-
-    function closePlayer(){player.src=''; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');}
-
-
+    function closePlayer(){
+      player.src='';modal.classList.remove('open');modal.setAttribute('aria-hidden','true');
+    }
   </script>
-
-
 </body>
-
-
 </html>
