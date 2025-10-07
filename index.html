@@ -78,7 +78,6 @@
   <header>
     <nav class="nav container">
       <div class="logo"><div class="logo-badge">🎬</div><span>NossoFlix</span></div>
-
       <div class="search">
         <input id="q" class="input" placeholder="Pesquisar vídeos... (título, categoria, tags)" />
         <select id="category"><option value="">Todas categorias</option></select>
@@ -125,8 +124,8 @@
       {id:"19xpq2pDAT6mcnzuaDFC8AgQQL76IuL9Y", title:"OPERAÇÃO VINGANÇA", category:"Ação", tags:["operação, vingança, ação"], thumb:"https://disneyplusbrasil.com.br/wp-content/uploads/2025/06/Operacao-Vinganca-Disney-Plus.jpg"},
       {id:"1zpgnifk-uPG0Ogb9OB9PfvDLnSjZ8lKS", title:"SMURFS", category:"Infantil", tags:["Smurfs, snurfete, infantil"], thumb:"https://static.wixstatic.com/media/7f35d8_072b536a3cc44056b86b752d87ab3b91~mv2.jpg/v1/fill/w_1000,h_483,al_c,q_85,usm_0.66_1.00_0.01/7f35d8_072b536a3cc44056b86b752d87ab3b91~mv2.jpg"},
       {id:"1rnbi7OQKfZTOWlczSKxvFjPBfHWr7e19", title:"THUNDERBOLTS", category:"Ação", tags:["vingadores, thunderbolts, Ação"], thumb:"https://updateordie.com/wp-content/uploads/2025/02/thunderbolts-movie-poster-1-1044x862.webp"}
-
     ];
+
     const CATEGORY_COLORS = {"Infantil":"rgba(56,189,248,.18)","Ação":"rgba(244,114,182,.18)","Corrida":"rgba(163,230,53,.18)","Terror":"rgba(255, 221, 51, 0.18)"};
 
     // GATE
@@ -171,20 +170,27 @@
     modal.addEventListener('click',e=>{if(e.target===modal)closePlayer();});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closePlayer();});
 
+    // ✅ ABRIR EM TELA CHEIA AUTOMÁTICA
     function openPlayer(v){
-      // FORMATO DE EMBED DO GOOGLE DRIVE
       player.src = `https://drive.google.com/file/d/${v.id}/preview`;
       nowTitle.textContent = v.title;
-      if(v.pdf){pdfBtn.href=v.pdf;pdfBtn.style.display='flex';}else{pdfBtn.style.display='none';}
       modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
+      pdfBtn.style.display = v.pdf ? 'flex' : 'none';
+      if(v.pdf) pdfBtn.href = v.pdf;
+
+      // Tentar entrar em tela cheia
+      const req = player.requestFullscreen || player.webkitRequestFullscreen || player.msRequestFullscreen;
+      if (req) setTimeout(() => req.call(player), 300);
     }
 
+    // ✅ SAIR DO FULLSCREEN AO FECHAR
     function closePlayer(){
-      player.src='';
       modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
+      player.src='';
+      const exit=document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+      if (document.fullscreenElement && exit) exit.call(document);
     }
+
   </script>
 </body>
 </html>
